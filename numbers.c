@@ -6,6 +6,11 @@ int square_of_num(int value)
   return value * value;
 }
 
+Bool is_even(int value)
+{
+  return value % 2 == 0;
+}
+
 int main(void);
 int main(void)
 {
@@ -16,5 +21,9 @@ int main(void)
 
   Array *newArray = map(numbers, &square_of_num);
   PRINT_STRING("Squares are :");
+  display_Array(newArray);
+
+  newArray = filter(numbers, &is_even);
+  PRINT_STRING("Even Numbers are :");
   display_Array(newArray);
 }

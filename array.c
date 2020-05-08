@@ -32,3 +32,19 @@ Array *map(Array *array, Mapper mapper)
   }
   return create_Array_from(mapped_values, array->length);
 }
+
+Array *filter(Array *array, Predicate predicate)
+{
+  int filtered_values[array->length];
+  int filters_count = 0;
+  FOR_EACH(0, array->length)
+  {
+    Bool result = (*predicate)(array->array[i]);
+    if (result)
+    {
+      filtered_values[filters_count] = array->array[i];
+      filters_count++;
+    }
+  }
+  return create_Array_from(filtered_values, filters_count);
+}
