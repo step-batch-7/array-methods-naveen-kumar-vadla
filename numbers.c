@@ -11,6 +11,11 @@ Bool is_even(int value)
   return value % 2 == 0;
 }
 
+int sum(int context, int value)
+{
+  return context + value;
+}
+
 int main(void);
 int main(void)
 {
@@ -26,4 +31,8 @@ int main(void)
   newArray = filter(numbers, &is_even);
   PRINT_STRING("Even Numbers are :");
   display_Array(newArray);
+
+  int total = reduce(numbers, 0, &sum);
+  PRINT_STRING("Sum of Numbers is :");
+  printf("%d\n", total);
 }

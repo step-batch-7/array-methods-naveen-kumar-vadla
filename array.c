@@ -48,3 +48,12 @@ Array *filter(Array *array, Predicate predicate)
   }
   return create_Array_from(filtered_values, filters_count);
 }
+
+int reduce(Array *array, int context, Reducer reducer)
+{
+  FOR_EACH(0, array->length)
+  {
+    context = (*reducer)(context, array->array[i]);
+  }
+  return context;
+}
