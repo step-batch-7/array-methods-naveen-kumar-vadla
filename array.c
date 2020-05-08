@@ -22,3 +22,13 @@ void display_Array(Array *array)
   }
   printf("\n");
 }
+
+Array *map(Array *array, Mapper mapper)
+{
+  int mapped_values[array->length];
+  FOR_EACH(0, array->length)
+  {
+    mapped_values[i] = (*mapper)(array->array[i]);
+  }
+  return create_Array_from(mapped_values, array->length);
+}
