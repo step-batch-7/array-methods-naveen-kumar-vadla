@@ -14,4 +14,7 @@ void test_map(Array *array, Array *empty_array);
 Predicate is_even;
 void test_filter(Array *array, Array *empty_array);
 
+Reducer sum;
+void test_reduce(Array *array, Array *empty_array);
+
 #endif

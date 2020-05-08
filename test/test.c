@@ -55,6 +55,28 @@ void test_filter(Array *array, Array *empty_array)
   PRINT_STRING("should give empty array for given empty array");
 }
 
+int sum(int context, int value)
+{
+  return context + value;
+}
+
+void test_reduce(Array *array, Array *empty_array)
+{
+  PRINT_STRING("\nreduce");
+
+  int expected = 15;
+  int actual = reduce(array, 0, &sum);
+  Bool status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer and context");
+
+  expected = 0;
+  actual = reduce(empty_array, 0, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should give context for given empty array");
+}
+
 int main(void)
 {
   int values[] = {1, 2, 3, 4, 5};
@@ -63,6 +85,7 @@ int main(void)
 
   test_map(array, empty_array);
   test_filter(array, empty_array);
+  test_reduce(array, empty_array);
 
   printf(GREEN "\n%d passing" RESET, PASSING_TESTS);
   printf(RED "\n%d failing\n" RESET, FAILING_TESTS);
