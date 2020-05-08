@@ -12,6 +12,7 @@
 #define PASS GREEN "\u2714 " RESET
 #define FAIL RED "\u2718 " RESET
 
+Bool assert_integer(int actual, int expected);
 Bool assert_Array(Array *actual, Array *expected);
 
 #endif
