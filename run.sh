@@ -5,6 +5,6 @@ executable=$2
 
 mkdir -p outputs
 rm -rf $directory/*.o
-gcc -c $directory/*.c
+gcc -c array.c $directory/*.c
 gcc -o outputs/$executable *.o && outputs/$executable
 rm -rf *.o
