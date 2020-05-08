@@ -11,4 +11,7 @@ void display_pass_or_fail(Bool status);
 Mapper square_of_num;
 void test_map(Array *array, Array *empty_array);
 
+Predicate is_even;
+void test_filter(Array *array, Array *empty_array);
+
 #endif

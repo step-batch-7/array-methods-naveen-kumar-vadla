@@ -32,6 +32,29 @@ void test_map(Array *array, Array *empty_array)
   PRINT_STRING("should give empty array for given empty array");
 }
 
+Bool is_even(int value)
+{
+  return value % 2 == 0;
+}
+
+void test_filter(Array *array, Array *empty_array)
+{
+  PRINT_STRING("\nfilter");
+  int expected_values[] = {2, 4};
+
+  Array *expected = create_Array_from(expected_values, 2);
+  Array *newArray = filter(array, &is_even);
+  Bool status = assert_Array(newArray, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter the array using given predicate");
+
+  expected = create_Array_from(expected_values, 0);
+  newArray = filter(empty_array, &is_even);
+  status = assert_Array(newArray, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should give empty array for given empty array");
+}
+
 int main(void)
 {
   int values[] = {1, 2, 3, 4, 5};
@@ -39,6 +62,7 @@ int main(void)
   Array *empty_array = create_Array_from(values, 0);
 
   test_map(array, empty_array);
+  test_filter(array, empty_array);
 
   printf(GREEN "\n%d passing" RESET, PASSING_TESTS);
   printf(RED "\n%d failing\n" RESET, FAILING_TESTS);
