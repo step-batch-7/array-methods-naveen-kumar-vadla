@@ -23,7 +23,7 @@ void display_Array(Array *array)
   printf("\n");
 }
 
-Array *map(Array *array, Mapper mapper)
+Array *map(Array *array, Mapper *mapper)
 {
   int mapped_values[array->length];
   FOR_EACH(0, array->length)
@@ -33,7 +33,7 @@ Array *map(Array *array, Mapper mapper)
   return create_Array_from(mapped_values, array->length);
 }
 
-Array *filter(Array *array, Predicate predicate)
+Array *filter(Array *array, Predicate *predicate)
 {
   int filtered_values[array->length];
   int filters_count = 0;
@@ -49,7 +49,7 @@ Array *filter(Array *array, Predicate predicate)
   return create_Array_from(filtered_values, filters_count);
 }
 
-int reduce(Array *array, int context, Reducer reducer)
+int reduce(Array *array, int context, Reducer *reducer)
 {
   FOR_EACH(0, array->length)
   {

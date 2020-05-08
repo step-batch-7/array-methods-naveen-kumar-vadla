@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "array.h"
 
+Mapper square_of_num;
+Predicate is_even;
+Reducer sum;
+
 int square_of_num(int value)
 {
   return value * value;

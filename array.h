@@ -6,9 +6,9 @@ typedef enum
   True
 } Bool;
 
-typedef int (*Mapper)(int);
-typedef Bool (*Predicate)(int);
-typedef int (*Reducer)(int, int);
+typedef int(Mapper)(int);
+typedef Bool(Predicate)(int);
+typedef int(Reducer)(int, int);
 
 typedef struct
 {
@@ -16,9 +16,9 @@ typedef struct
   int length;
 } Array;
 
-Array *map(Array *src, Mapper mapper);
-Array *filter(Array *src, Predicate predicate);
-int reduce(Array *src, int init, Reducer reducer);
+Array *map(Array *src, Mapper *mapper);
+Array *filter(Array *src, Predicate *predicate);
+int reduce(Array *src, int init, Reducer *reducer);
 
 #define FOR_EACH(startAt, endAt) for (int i = startAt; i < endAt; i++)
 #define PRINT_STRING(string) printf("%s\n", string)
