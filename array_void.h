@@ -22,7 +22,7 @@ Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer);
 
 typedef void DisplayData(Object);
 
-ArrayVoid_ptr create_ArrayVoid_from(int length);
+ArrayVoid_ptr create_ArrayVoid(int length);
 void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer);
 
 #endif

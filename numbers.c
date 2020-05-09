@@ -75,7 +75,7 @@ int main(void)
   PRINT_STRING("------------ Void Map Filter Reduce ------------");
 
   ArrayVoid_ptr numbers_void, new_void_array;
-  numbers_void = create_ArrayVoid_from(length);
+  numbers_void = create_ArrayVoid(length);
   FOR_EACH(0, numbers_void->length)
   {
     numbers_void->array[i] = &values[i];
@@ -95,6 +95,6 @@ int main(void)
   PRINT_STRING("Sum of Numbers is :");
   total_void = reduce_void(numbers_void, initial_context, sum_void);
   display_integer(total_void);
-  PRINT_STRING("\n");
+  PRINT_STRING(" ");
   return 0;
 }

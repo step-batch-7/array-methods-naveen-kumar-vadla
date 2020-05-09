@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "array_void.h"
 
-ArrayVoid_ptr create_ArrayVoid_from(int length)
+ArrayVoid_ptr create_ArrayVoid(int length)
 {
   ArrayVoid_ptr array = (ArrayVoid_ptr)malloc(sizeof(ArrayVoid));
   array->array = (Object *)malloc(sizeof(Object) * length);
@@ -21,7 +21,7 @@ void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer)
 
 ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
 {
-  ArrayVoid_ptr new_array = create_ArrayVoid_from(src->length);
+  ArrayVoid_ptr new_array = create_ArrayVoid(src->length);
   FOR_EACH(0, new_array->length)
   {
     new_array->array[i] = (*mapper)(src->array[i]);
@@ -42,7 +42,7 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
       filters_count++;
     }
   }
-  ArrayVoid_ptr new_array = create_ArrayVoid_from(filters_count);
+  ArrayVoid_ptr new_array = create_ArrayVoid(filters_count);
   FOR_EACH(0, new_array->length)
   {
     new_array->array[i] = filtered_values[i];
