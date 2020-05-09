@@ -23,19 +23,33 @@ void test_map(void)
 
   PRINT_STRING("\nmap");
 
-  array = create_Array_from(values, 5);
-  expected = create_Array_from(expected_values, 5);
-  actual = map(array, &square_of_num);
-  status = assert_Array(actual, expected);
-  display_pass_or_fail(status);
-  PRINT_STRING("should map the array with given mapper");
-
   array = create_Array_from(values, 0);
   expected = create_Array_from(expected_values, 0);
   actual = map(array, &square_of_num);
   status = assert_Array(actual, expected);
   display_pass_or_fail(status);
   PRINT_STRING("should give empty array for given empty array");
+
+  array = create_Array_from(values, 1);
+  expected = create_Array_from(expected_values, 1);
+  actual = map(array, &square_of_num);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map a single value for a given single element array with given mapper");
+
+  array = create_Array_from(values, 2);
+  expected = create_Array_from(expected_values, 2);
+  actual = map(array, &square_of_num);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map two values for a given two element array with given mapper");
+
+  array = create_Array_from(values, 5);
+  expected = create_Array_from(expected_values, 5);
+  actual = map(array, &square_of_num);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map more values for a given large array with given mapper");
 }
 
 Bool is_even(int value)
