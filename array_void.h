@@ -20,4 +20,9 @@ ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper);
 ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate);
 Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer);
 
+typedef void DisplayData(Object);
+
+ArrayVoid_ptr create_ArrayVoid_from(int length);
+void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer);
+
 #endif
