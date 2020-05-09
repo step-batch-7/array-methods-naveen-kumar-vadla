@@ -18,3 +18,13 @@ void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer)
   }
   printf("\n");
 }
+
+ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
+{
+  ArrayVoid_ptr new_array = create_ArrayVoid_from(src->length);
+  FOR_EACH(0, new_array->length)
+  {
+    new_array->array[i] = (*mapper)(src->array[i]);
+  }
+  return new_array;
+}
