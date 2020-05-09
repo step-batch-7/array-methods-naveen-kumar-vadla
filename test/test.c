@@ -59,19 +59,12 @@ Bool is_even(int value)
 
 void test_filter(void)
 {
-  int values[] = {1, 2, 3, 4, 5};
+  int values[5];
   int expected_values[] = {2, 4};
   Array *array, *actual, *expected;
   Bool status;
 
   PRINT_STRING("\nfilter");
-
-  array = create_Array_from(values, 5);
-  expected = create_Array_from(expected_values, 2);
-  actual = filter(array, &is_even);
-  status = assert_Array(actual, expected);
-  display_pass_or_fail(status);
-  PRINT_STRING("should filter the array using given predicate");
 
   array = create_Array_from(values, 0);
   expected = create_Array_from(expected_values, 0);
@@ -79,6 +72,53 @@ void test_filter(void)
   status = assert_Array(actual, expected);
   display_pass_or_fail(status);
   PRINT_STRING("should give empty array for given empty array");
+
+  values[0] = 2;
+  array = create_Array_from(values, 1);
+  expected = create_Array_from(expected_values, 1);
+  actual = filter(array, &is_even);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter one element when there is only one element in array satisfying given predicate");
+
+  values[0] = 1;
+  array = create_Array_from(values, 1);
+  expected = create_Array_from(expected_values, 0);
+  actual = filter(array, &is_even);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter no elements when there is only one element in array not satisfying given predicate");
+
+  values[0] = 1;
+  values[1] = 2;
+  array = create_Array_from(values, 2);
+  expected = create_Array_from(expected_values, 1);
+  actual = filter(array, &is_even);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter the elements satisfying given predicate when 2 elements are there in array");
+
+  values[0] = 1;
+  values[1] = 2;
+  values[2] = 3;
+  values[3] = 4;
+  values[4] = 5;
+  array = create_Array_from(values, 5);
+  expected = create_Array_from(expected_values, 2);
+  actual = filter(array, &is_even);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter the elements satisfying given predicate when more than 2 elements are there in array");
+
+  values[0] = 1;
+  values[1] = 3;
+  values[2] = 5;
+  array = create_Array_from(values, 3);
+  expected = create_Array_from(expected_values, 0);
+  actual = filter(array, &is_even);
+  status = assert_Array(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter empty when there is no elements satisfying given predicate");
 }
 
 int sum(int context, int value)
