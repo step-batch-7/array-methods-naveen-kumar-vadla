@@ -135,19 +135,54 @@ void test_reduce(void)
 
   PRINT_STRING("\nreduce");
 
-  expected = 15;
-  array = create_Array_from(values, 5);
-  actual = reduce(array, 0, &sum);
-  status = assert_integer(actual, expected);
-  display_pass_or_fail(status);
-  PRINT_STRING("should reduce the array using given reducer and context");
-
   expected = 0;
   array = create_Array_from(values, 0);
   actual = reduce(array, 0, &sum);
   status = assert_integer(actual, expected);
   display_pass_or_fail(status);
-  PRINT_STRING("should give context for given empty array");
+  PRINT_STRING("should give initial context for given empty array");
+
+  expected = 1;
+  array = create_Array_from(values, 1);
+  actual = reduce(array, 0, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer for array with one values");
+
+  expected = 3;
+  array = create_Array_from(values, 2);
+  actual = reduce(array, 0, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer for array with 2 values");
+
+  expected = 15;
+  array = create_Array_from(values, 5);
+  actual = reduce(array, 0, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer for array more than 2 values");
+
+  expected = 11;
+  array = create_Array_from(values, 1);
+  actual = reduce(array, 10, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer and using given initial context for array with one values");
+
+  expected = 13;
+  array = create_Array_from(values, 2);
+  actual = reduce(array, 10, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer and using given initial context for array with 2 values");
+
+  expected = 25;
+  array = create_Array_from(values, 5);
+  actual = reduce(array, 10, &sum);
+  status = assert_integer(actual, expected);
+  display_pass_or_fail(status);
+  PRINT_STRING("should reduce the array using given reducer and using given initial context for array more than 2 values");
 }
 
 int main(void)
