@@ -41,6 +41,13 @@ Bool is_even_void(Object value)
   return (*(int *)value) % 2 == 0;
 }
 
+Object sum_void(Object context, Object value)
+{
+  int *result = malloc(sizeof(int));
+  *result = (*(int *)context) + (*(int *)value);
+  return result;
+}
+
 int main(void);
 int main(void)
 {
@@ -81,4 +88,13 @@ int main(void)
   new_void_array = filter_void(numbers_void, is_even_void);
   PRINT_STRING("Even Numbers are :");
   display_ArrayVoid(new_void_array, &display_integer);
+
+  Object initial_context, total_void;
+  int context = 0;
+  initial_context = &context;
+  PRINT_STRING("Sum of Numbers is :");
+  total_void = reduce_void(numbers_void, initial_context, sum_void);
+  display_integer(total_void);
+  PRINT_STRING("\n");
+  return 0;
 }

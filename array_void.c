@@ -49,3 +49,12 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
   }
   return new_array;
 }
+
+Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer)
+{
+  FOR_EACH(0, src->length)
+  {
+    init = (*reducer)(init, src->array[i]);
+  }
+  return init;
+}
