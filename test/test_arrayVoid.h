@@ -8,6 +8,7 @@ MapperVoid convert_to_lowercase;
 void test_map_void(void);
 
 PredicateVoid is_even_void;
+PredicateVoid is_vowel_void;
 void test_filter_void(void);
 
 ReducerVoid sum_void;

@@ -25,6 +25,7 @@ int main(void)
   printf("\n------------------------------------------------ Void Map Filter Reduce ------------------------------------------------\n");
 
   test_map_void();
+  test_filter_void();
   test_reduce_void();
 
   printf(GREEN "\n%d passing" RESET, PASSING_TESTS);

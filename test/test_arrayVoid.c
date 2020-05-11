@@ -103,6 +103,125 @@ void test_map_void(void)
   PRINT_STRING("should map more values for a given large array with given mapper");
 }
 
+Bool is_even_void(Object value)
+{
+  return (*(int *)value) % 2 == 0;
+}
+
+Bool is_vowel_void(Object value)
+{
+  Object character = convert_to_lowercase(value);
+  return *(char *)character == 'a' || *(char *)character == 'e' || *(char *)character == 'i' || *(char *)character == 'o' || *(char *)character == 'u';
+}
+
+void test_filter_void(void)
+{
+  int values[5];
+  char char_values[5];
+  int expected_values[] = {2, 4};
+  char expected_char_values[] = {'a', 'e'};
+  ArrayVoid_ptr array, actual, expected;
+  Bool status;
+
+  PRINT_STRING("\nfilter_void");
+
+  array = create_int_ArrayVoid(values, 0);
+  expected = create_int_ArrayVoid(expected_values, 0);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  array = create_char_ArrayVoid(char_values, 0);
+  expected = create_char_ArrayVoid(expected_char_values, 0);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should give empty array for given empty array");
+
+  values[0] = 2;
+  array = create_int_ArrayVoid(values, 1);
+  expected = create_int_ArrayVoid(expected_values, 1);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  char_values[0] = 'a';
+  array = create_char_ArrayVoid(char_values, 1);
+  expected = create_char_ArrayVoid(expected_char_values, 1);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter one element when there is only one element in array satisfying given predicate");
+
+  values[0] = 1;
+  array = create_int_ArrayVoid(values, 1);
+  expected = create_int_ArrayVoid(expected_values, 0);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  char_values[0] = 'b';
+  array = create_char_ArrayVoid(char_values, 1);
+  expected = create_char_ArrayVoid(expected_char_values, 0);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter no elements when there is only one element in array not satisfying given predicate");
+
+  values[0] = 1;
+  values[1] = 2;
+  array = create_int_ArrayVoid(values, 2);
+  expected = create_int_ArrayVoid(expected_values, 1);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  char_values[0] = 'a';
+  char_values[1] = 'b';
+  array = create_char_ArrayVoid(char_values, 2);
+  expected = create_char_ArrayVoid(expected_char_values, 1);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter the elements satisfying given predicate when 2 elements are there in array");
+
+  values[0] = 1;
+  values[1] = 2;
+  values[2] = 3;
+  values[3] = 4;
+  values[4] = 5;
+  array = create_int_ArrayVoid(values, 5);
+  expected = create_int_ArrayVoid(expected_values, 2);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  char_values[0] = 'a';
+  char_values[1] = 'b';
+  char_values[2] = 'c';
+  char_values[3] = 'd';
+  char_values[4] = 'e';
+  array = create_char_ArrayVoid(char_values, 5);
+  expected = create_char_ArrayVoid(expected_char_values, 2);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter the elements satisfying given predicate when more than 2 elements are there in array");
+
+  values[0] = 1;
+  values[1] = 3;
+  values[2] = 5;
+  array = create_int_ArrayVoid(values, 3);
+  expected = create_int_ArrayVoid(expected_values, 0);
+  actual = filter_void(array, &is_even_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  char_values[0] = 'b';
+  char_values[1] = 'c';
+  char_values[2] = 'd';
+  array = create_char_ArrayVoid(char_values, 3);
+  expected = create_char_ArrayVoid(expected_char_values, 0);
+  actual = filter_void(array, &is_vowel_void);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should filter empty when there is no elements satisfying given predicate");
+}
+
 Object sum_void(Object context, Object value)
 {
   *(int *)context = (*(int *)context) + (*(int *)value);
