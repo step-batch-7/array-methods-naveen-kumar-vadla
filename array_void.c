@@ -10,7 +10,7 @@ ArrayVoid_ptr create_ArrayVoid(int length)
   return array;
 }
 
-void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer)
+void display_ArrayVoid(ArrayVoid_ptr array, DisplayData *displayer)
 {
   FOR_EACH(0, array->length)
   {
@@ -19,7 +19,7 @@ void display_ArrayVoid(ArrayVoid_ptr array, DisplayData displayer)
   printf("\n");
 }
 
-ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
+ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid *mapper)
 {
   ArrayVoid_ptr new_array = create_ArrayVoid(src->length);
   FOR_EACH(0, new_array->length)
@@ -29,7 +29,7 @@ ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
   return new_array;
 }
 
-ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
+ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid *predicate)
 {
   Object filtered_values[src->length];
   int filters_count = 0;
@@ -50,7 +50,7 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
   return new_array;
 }
 
-Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer)
+Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid *reducer)
 {
   FOR_EACH(0, src->length)
   {

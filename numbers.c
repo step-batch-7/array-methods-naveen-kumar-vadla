@@ -4,9 +4,14 @@
 #include "array.h"
 #include "array_void.h"
 
+void display_integer(Object number);
+
 Mapper square_of_num;
 Predicate is_even;
 Reducer sum;
+MapperVoid square_of_num_void;
+PredicateVoid is_even_void;
+ReducerVoid sum_void;
 
 int square_of_num(int value)
 {
@@ -23,7 +28,6 @@ int sum(int context, int value)
   return context + value;
 }
 
-void display_integer(Object number);
 void display_integer(Object number)
 {
   printf("%d ", *(int *)number);
@@ -80,11 +84,11 @@ int main(void)
     numbers_void->array[i] = &values[i];
   }
 
-  new_void_array = map_void(numbers_void, square_of_num_void);
+  new_void_array = map_void(numbers_void, &square_of_num_void);
   PRINT_STRING("Squares are :");
   display_ArrayVoid(new_void_array, &display_integer);
 
-  new_void_array = filter_void(numbers_void, is_even_void);
+  new_void_array = filter_void(numbers_void, &is_even_void);
   PRINT_STRING("Even Numbers are :");
   display_ArrayVoid(new_void_array, &display_integer);
 
@@ -92,7 +96,7 @@ int main(void)
   int context = 0;
   initial_context = &context;
   PRINT_STRING("Sum of Numbers is :");
-  total_void = reduce_void(numbers_void, initial_context, sum_void);
+  total_void = reduce_void(numbers_void, initial_context, &sum_void);
   display_integer(total_void);
   PRINT_STRING(" ");
   return 0;
