@@ -4,6 +4,7 @@
 #define PRINT_STRING(string) printf("%s\n", string)
 
 MapperVoid square_of_num_void;
+MapperVoid convert_to_lowercase;
 void test_map_void(void);
 
 PredicateVoid is_even_void;

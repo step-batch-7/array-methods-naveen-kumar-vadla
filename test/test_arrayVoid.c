@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../array_void.h"
 #include "assert.h"
 #include "test_arrayVoid.h"
@@ -12,6 +13,94 @@ ArrayVoid_ptr create_int_ArrayVoid(int *values, int length)
     array->array[i] = &values[i];
   }
   return array;
+}
+
+ArrayVoid_ptr create_char_ArrayVoid(char *values, int length)
+{
+  ArrayVoid_ptr array = create_ArrayVoid(length);
+  FOR_EACH(0, array->length)
+  {
+    array->array[i] = &values[i];
+  }
+  return array;
+}
+
+Object square_of_num_void(Object value)
+{
+  Object result = malloc(sizeof(int));
+  *(int *)result = (*(int *)value) * (*(int *)value);
+  return result;
+}
+
+Object convert_to_lowercase(Object value)
+{
+  Object result = malloc(sizeof(int));
+  *(char *)result = (*(char *)value);
+  if (*(char *)result >= 'A' && *(char *)result <= 'Z')
+  {
+    *(char *)result = *(char *)result + 32;
+  }
+  return result;
+}
+
+void test_map_void(void)
+{
+  int values[] = {1, 2, 3, 4, 5};
+  int expected_values[] = {1, 4, 9, 16, 25};
+  char char_values[] = {'a', 'B', 'c', 'D', 'e'};
+  char expected_char_values[] = {'a', 'b', 'c', 'd', 'e'};
+  ArrayVoid_ptr array, actual, expected;
+  Bool status;
+
+  PRINT_STRING("\nmap_void");
+
+  array = create_int_ArrayVoid(values, 0);
+  expected = create_int_ArrayVoid(expected_values, 0);
+  actual = map_void(array, &square_of_num_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  array = create_char_ArrayVoid(char_values, 0);
+  expected = create_char_ArrayVoid(expected_char_values, 0);
+  actual = map_void(array, &convert_to_lowercase);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should give empty array for given empty array");
+
+  array = create_int_ArrayVoid(values, 1);
+  expected = create_int_ArrayVoid(expected_values, 1);
+  actual = map_void(array, &square_of_num_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  array = create_char_ArrayVoid(char_values, 1);
+  expected = create_char_ArrayVoid(expected_char_values, 1);
+  actual = map_void(array, &convert_to_lowercase);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map a single value for a given single element array with given mapper");
+
+  array = create_int_ArrayVoid(values, 2);
+  expected = create_int_ArrayVoid(expected_values, 2);
+  actual = map_void(array, &square_of_num_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  array = create_char_ArrayVoid(char_values, 2);
+  expected = create_char_ArrayVoid(expected_char_values, 2);
+  actual = map_void(array, &convert_to_lowercase);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map two values for a given two element array with given mapper");
+
+  array = create_int_ArrayVoid(values, 5);
+  expected = create_int_ArrayVoid(expected_values, 5);
+  actual = map_void(array, &square_of_num_void);
+  status = assert_ArrayVoid(actual, expected, &assert_integer_void);
+
+  array = create_char_ArrayVoid(char_values, 5);
+  expected = create_char_ArrayVoid(expected_char_values, 5);
+  actual = map_void(array, &convert_to_lowercase);
+  status = status && assert_ArrayVoid(actual, expected, &assert_character_void);
+  display_pass_or_fail(status);
+  PRINT_STRING("should map more values for a given large array with given mapper");
 }
 
 Object sum_void(Object context, Object value)
