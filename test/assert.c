@@ -1,10 +1,14 @@
 #include <stdio.h>
-#include "../array.h"
 #include "assert.h"
 
 Bool assert_integer(int actual, int expected)
 {
   return actual == expected;
+}
+
+Bool assert_integer_void(Object actual, Object expected)
+{
+  return *(int *)actual == *(int *)expected;
 }
 
 Bool assert_Array(Array *actual, Array *expected)
