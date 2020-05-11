@@ -31,8 +31,8 @@ void display_integer(Object number)
 
 Object square_of_num_void(Object value)
 {
-  int *result = malloc(sizeof(int));
-  *result = (*(int *)value) * (*(int *)value);
+  Object result = malloc(sizeof(int));
+  *(int *)result = (*(int *)value) * (*(int *)value);
   return result;
 }
 
@@ -43,9 +43,8 @@ Bool is_even_void(Object value)
 
 Object sum_void(Object context, Object value)
 {
-  int *result = malloc(sizeof(int));
-  *result = (*(int *)context) + (*(int *)value);
-  return result;
+  *(int *)context = (*(int *)context) + (*(int *)value);
+  return context;
 }
 
 int main(void);
